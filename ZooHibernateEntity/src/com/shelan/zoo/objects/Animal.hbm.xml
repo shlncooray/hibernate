@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 3, 2015 1:29:57 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.shelan.zoo.objects.Animal" table="Animal">
+		<id name="animalId" type="int">
+			<column name="ANIMALID" />
+			<generator class="increment" />
+		</id>
+		<property generated="never" lazy="false" name="animalName"
+			type="java.lang.String">
+			<column name="ANIMALNAME" />
+		</property>
+		<property generated="never" lazy="false" name="animalType"
+			type="java.lang.String">
+			<column name="ANIMALTYPE" />
+		</property>
+		<property generated="never" lazy="false" name="animalAge"
+			type="int">
+			<column name="ANIMALAGE" />
+		</property>
+		<component class="com.shelan.zoo.objects.Cage" name="Cage">
+			<property generated="never" lazy="false" name="cageNumber"
+				type="int">
+				<column name="CAGENUMBER" />
+			</property>
+			<property generated="never" lazy="false" name="location"
+				type="java.lang.String">
+				<column name="LOCATION" />
+			</property>
+		</component>
+		<list name="cageAllocations" table="Cage_Allocation" inverse="true" cascade="save-update">
+			<key column="ANIMAL_ID" />
+			<list-index column="ROWID" />
+			<one-to-many class="com.shelan.zoo.objects.CageAllocation" />
+		</list>
+	</class>
+</hibernate-mapping>

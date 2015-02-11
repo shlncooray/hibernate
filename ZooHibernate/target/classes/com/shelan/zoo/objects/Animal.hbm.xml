@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 3, 2015 1:29:57 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.shelan.zoo.objects.Animal" table="Animal">
+		<id name="animalId" type="int">
+			<column name="ANIMALID" />
+			<generator class="increment" />
+		</id>
+		<property generated="never" lazy="false" name="animalName"
+			type="java.lang.String">
+			<column name="ANIMALNAME" />
+		</property>
+		<property generated="never" lazy="false" name="animalType"
+			type="java.lang.String">
+			<column name="ANIMALTYPE" />
+		</property>
+		<property generated="never" lazy="false" name="animalAge"
+			type="int">
+			<column name="ANIMALAGE" />
+		</property>
+
+		<component class="com.shelan.zoo.objects.Cage" name="Cage">
+			<property generated="never" lazy="false" name="cageNumber"
+				type="int">
+				<column name="CAGENUMBER" />
+			</property>
+			<property generated="never" lazy="false" name="location"
+				type="java.lang.String">
+				<column name="LOCATION" />
+			</property>
+		</component>
+
+		<!-- <idbag name="cageAllocations" table="Cage_Allocation"> <collection-id 
+			type="int" column="PRIMARYID" > <generator class="increment" /> </collection-id> 
+			<key column="FOREIGNID" /> <composite-element class="com.shelan.zoo.objects.CageAllocation"> 
+			<property column="ALLOCATEDDATE" name="allocatedDate" type="date" /> <property 
+			column="DEALLOCATEDDATE" name="deAllocatedDate" type="date" /> <property 
+			column="REASON" name="reason" type="java.lang.String" /> </composite-element> 
+			</idbag> -->
+
+		<list name="cageAllocations" table="Cage_Allocation">
+			<key column="ID" />
+			<list-index column="ROW_ID" />
+			<composite-element class="com.shelan.zoo.objects.CageAllocation">
+				<property column="ALLOCATEDDATE" name="allocatedDate" type="date" />
+				<property column="DEALLOCATEDDATE" name="deAllocatedDate"
+					type="date" />
+				<property column="REASON" name="reason" type="java.lang.String" />
+			</composite-element>
+		</list>
+
+
+		<!-- <set name="cageAllocations" sort="unsorted" table="Cage_Allocation"> 
+			<key column="ID" /> <composite-element class="com.shelan.zoo.objects.CageAllocation"> 
+			<property name="allocatedDate" type="date"> <column name="ALLOCATEDDATE" 
+			/> </property> <property name="deAllocatedDate" type="date"> <column name="DEALLOCATEDDATE" 
+			/> </property> <property name="reason" type="java.lang.String"> <column name="REASON" 
+			/> </property> </composite-element> </set> -->
+
+	</class>
+</hibernate-mapping> 

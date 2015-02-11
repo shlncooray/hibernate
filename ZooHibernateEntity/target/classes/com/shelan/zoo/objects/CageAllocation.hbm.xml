@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 11, 2015 8:22:51 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.shelan.zoo.objects.CageAllocation" table="CAGEALLOCATION">
+        <id name="cageAllocationId" type="int">
+            <column name="CAGE_ALLOCATION_ID" />
+            <generator class="increment" />
+        </id>
+        <property name="allocatedDate" type="java.util.Date">
+            <column name="ALLOCATEDDATE" />
+        </property>
+        <property name="deAllocatedDate" type="java.util.Date">
+            <column name="DEALLOCATEDDATE" />
+        </property>
+        <property name="reason" type="java.lang.String">
+            <column name="REASON" />
+        </property>
+        <many-to-one name="animal" class="com.shelan.zoo.objects.Animal" not-null="true">
+            <column name="ANIMAL_ID" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
